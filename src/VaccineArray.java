@@ -6,8 +6,13 @@
  */
 
 public class VaccineArray {
-    Vaccine[] data = new Vaccine[10000];
-    int records = 0;
+    Vaccine[] data;
+    int records;
+
+    public VaccineArray() {
+        data = new Vaccine[10000];
+        records = 0;
+    }
 
     public void add(Vaccine vaccine) {
         data[records] = vaccine; 
