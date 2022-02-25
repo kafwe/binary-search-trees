@@ -10,7 +10,6 @@ public class Vaccine implements Comparable<Vaccine> {
     private String date;
     private String vaccinations;
 
-
     /**
      * Constructs a Vaccine object by parsing a line from the CSV file.
      * The data is in the order: country, date, vaccinations
@@ -43,6 +42,19 @@ public class Vaccine implements Comparable<Vaccine> {
      */
     public String getKey() {
         return country + date; 
+    }
+
+    /**
+     * Compares this object with the specified object for order. 
+     * 
+     * @param otherVaccine the object to be compared.
+     *
+     * @return a negative integer, zero, or a positive integer 
+     * as this object is less than, equal to, or greater than the specified object.
+     */
+    @Override
+    public int compareTo(Vaccine otherVaccine) {
+        return this.getKey().compareTo(otherVaccine.getKey());
     }
 
 }
