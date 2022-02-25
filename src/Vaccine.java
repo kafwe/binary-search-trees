@@ -24,6 +24,25 @@ public class Vaccine implements Comparable<Vaccine> {
         vaccinations = data.length == 3 ? data[2] : "0";
     }
 
+    public String getCountry() {
+        return country;
+    }
 
-    
+    public String getDate() {
+        return date;
+    }
+
+    public String getVaccinations() {
+        return vaccinations;
+    }
+
+    /**
+     * Concatenates the country and date to form a unique key
+     * 
+     * @return the key of the Vaccine object
+     */
+    public String getKey() {
+        return country + date; 
+    }
+
 }
