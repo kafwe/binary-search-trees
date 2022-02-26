@@ -6,14 +6,20 @@
  */
 
 public class VaccineArray {
-    Vaccine[] data;
-    int records;
+    private Vaccine[] data;
+    private int records;
+
 
     public VaccineArray() {
-        data = new Vaccine[10000];
+        data = new Vaccine[10000]; // 9919 entries in csv file
         records = 0;
     }
 
+    /**
+     * Adds a Vaccine object to the array
+     * 
+     * @param vaccine the vaccine to add
+     */
     public void add(Vaccine vaccine) {
         data[records] = vaccine; 
         records++;
@@ -35,5 +41,7 @@ public class VaccineArray {
         }
         return null;
     }
+
+    
 
 }
