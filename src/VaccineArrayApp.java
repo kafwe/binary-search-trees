@@ -32,6 +32,22 @@ public class VaccineArrayApp {
         }
     }
 
+    public void userInterface() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter the date:");
+        date = input.nextLine();
+
+        System.out.println("Enter the list of countries (end with an empty line):");
+        String country = input.nextLine(); 
+
+        while (!country.isEmpty()) {
+            countries[numCountries] = country;
+            numCountries++;
+            country = input.nextLine();
+        }
+    }
+
 
     public static void main(String[] args) {
 
