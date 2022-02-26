@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 
@@ -48,9 +47,21 @@ public class VaccineArrayApp {
         }
     }
 
-
     public static void main(String[] args) {
+        VaccineArrayApp app = new VaccineArrayApp();
+        app.readFile("data/vaccinations.csv");
+        app.userInterface();
 
+        System.out.println("Results:");
+        
+        for (String country : app.countries) {
+            if (country == null) break;
+            Vaccine vaccine = new Vaccine(country, app.date);
+            Vaccine found = app.data.find(vaccine);
+            String vaccinations = (found == null) ? "<Not Found>" : 
+            Integer.toString(found.getVaccinations());
+            System.out.println(country + " = " + vaccinations);
+        } 
     }
      
 }
