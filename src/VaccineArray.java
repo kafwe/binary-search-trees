@@ -1,5 +1,5 @@
 /**
- * A class to hold all vaccination data and provide certain operations
+ * A class to store all vaccination data and provide certain operations
  * 
  * @author Jordy Kafwe
  * @version 02/25/22

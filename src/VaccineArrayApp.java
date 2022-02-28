@@ -1,13 +1,20 @@
 import java.util.Scanner;
 import java.io.File;
 
+/**
+ * Class to allow searching through the data using an array
+ * 
+ * @author Jordy Kafwe
+ * @version 02/25/22
+ */
+
 public class VaccineArrayApp {
     private VaccineArray data;
     private String[] countries;
     private int numCountries;
     private String date;
 
-
+    
     private VaccineArrayApp() {
         data = new VaccineArray();
         countries = new String[10000];
