@@ -54,6 +54,24 @@ public class VaccineBSTApp {
         }
     }
 
+    public static void main(String[] args) {
+        VaccineBSTApp app = new VaccineBSTApp();
+        app.readFile("data/vaccinations.csv");
+        app.userInterface();
+
+
+        System.out.println("Results:");
+        
+        for (String country : app.countries) {
+            if (country == null) break;
+            Vaccine vaccine = new Vaccine(country, app.date);
+            BinaryTreeNode<Vaccine> found = app.tree.find(vaccine);
+            String vaccinations = (found == null) ? "<Not Found>" : 
+            Integer.toString(found.data.getVaccinations());
+            System.out.println(country + " = " + vaccinations);
+        } 
+    }
+
 
     
 }
