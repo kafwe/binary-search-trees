@@ -20,7 +20,7 @@ public class VaccineBSTApp {
         numCountries = 0;
     }
 
-    public void readFile(String path) {
+    private void readFile(String path) {
         try {
             Scanner reader = new Scanner(new File(path));
 
@@ -38,7 +38,7 @@ public class VaccineBSTApp {
         }
     }
 
-    public void userInterface() {
+    private void userInterface() {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter the date:");
@@ -54,7 +54,7 @@ public class VaccineBSTApp {
         }
     }
 
-    public String getResult(String country) {
+    private String getResult(String country) {
         Vaccine vaccine = new Vaccine(country, this.date);
         BinaryTreeNode<Vaccine> found = this.tree.find(vaccine);
         String vaccinations = (found == null) ? "<Not Found>" : 

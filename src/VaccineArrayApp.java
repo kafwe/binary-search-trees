@@ -21,7 +21,7 @@ public class VaccineArrayApp {
         numCountries = 0;
     }
 
-    public void readFile(String path) {
+    private void readFile(String path) {
         try {
             Scanner reader = new Scanner(new File(path));
 
@@ -38,7 +38,7 @@ public class VaccineArrayApp {
         }
     }
 
-    public void userInterface() {
+    private void userInterface() {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter the date:");
@@ -54,7 +54,7 @@ public class VaccineArrayApp {
         }
     }
 
-    public String getResult(String country) {
+    private String getResult(String country) {
         Vaccine vaccine = new Vaccine(country, this.date);
         Vaccine found = this.data.find(vaccine);
         String vaccinations = (found == null) ? "<Not Found>" : 
