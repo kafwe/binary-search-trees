@@ -54,6 +54,15 @@ public class VaccineArrayApp {
         }
     }
 
+    public String getResult(String country) {
+        Vaccine vaccine = new Vaccine(country, this.date);
+        Vaccine found = this.data.find(vaccine);
+        String vaccinations = (found == null) ? "<Not Found>" : 
+        Integer.toString(found.getVaccinations());
+        String result = country + " = " + vaccinations;
+        return result;
+    }
+
     public static void main(String[] args) {
         VaccineArrayApp app = new VaccineArrayApp();
         app.readFile("data/vaccinations.csv");
@@ -63,11 +72,8 @@ public class VaccineArrayApp {
         
         for (String country : app.countries) {
             if (country == null) break;
-            Vaccine vaccine = new Vaccine(country, app.date);
-            Vaccine found = app.data.find(vaccine);
-            String vaccinations = (found == null) ? "<Not Found>" : 
-            Integer.toString(found.getVaccinations());
-            System.out.println(country + " = " + vaccinations);
+            String result = app.getResult(country);
+            System.out.println(result);
         } 
     }
      
