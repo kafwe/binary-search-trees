@@ -8,11 +8,13 @@
 public class VaccineArray {
     private Vaccine[] data;
     private int records;
+    private int opCount;
 
 
     public VaccineArray() {
         data = new Vaccine[10000]; // 9919 entries in csv file
         records = 0;
+        opCount = 0;
     }
 
     /**
@@ -35,6 +37,7 @@ public class VaccineArray {
     public Vaccine find(Vaccine vaccine) {
         for (int i = 0; i < records; i++) {
             boolean isEqual = vaccine.compareTo(data[i]) == 0;
+            opCount++;
             if (isEqual) {
                 return data[i];
             }   

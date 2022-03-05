@@ -10,16 +10,12 @@ import java.io.File;
 
 public class VaccineBSTApp {
     private BinarySearchTree<Vaccine> tree;
-    private String[] countries;
-    private int numCountries; 
-    private String date; 
 
     private VaccineBSTApp() {
         tree = new BinarySearchTree<>();
-        countries = new String[10000];
-        numCountries = 0;
     }
 
+    
     private void readFile(String path) {
         try {
             Scanner reader = new Scanner(new File(path));
@@ -38,24 +34,9 @@ public class VaccineBSTApp {
         }
     }
 
-    private void userInterface() {
-        Scanner input = new Scanner(System.in);
 
-        System.out.println("Enter the date:");
-        date = input.nextLine();
-
-        System.out.println("Enter the list of countries (end with an empty line):");
-        String country = input.nextLine(); 
-
-        while (!country.isEmpty()) {
-            countries[numCountries] = country;
-            numCountries++;
-            country = input.nextLine();
-        }
-    }
-
-    private String getResult(String country) {
-        Vaccine vaccine = new Vaccine(country, this.date);
+    private String getResult(String country, String date) {
+        Vaccine vaccine = new Vaccine(country, date);
         BinaryTreeNode<Vaccine> found = this.tree.find(vaccine);
         String vaccinations = (found == null) ? "<Not Found>" : 
         Integer.toString(found.data.getVaccinations());
@@ -63,17 +44,32 @@ public class VaccineBSTApp {
         return result;
     }
 
+
+    private void userInterface() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter the date:");
+        String date = input.nextLine();
+
+        System.out.println("Enter the list of countries (end with an empty line):");
+        String country = input.nextLine();
+        
+        String results = "";
+
+        while (!country.isEmpty()) {
+            String result = getResult(country, date);
+            results += result + "\n"; 
+            country = input.nextLine();
+        }
+
+        System.out.println("Results:");
+        System.out.println(results.strip());
+    }
+
+
     public static void main(String[] args) {
         VaccineBSTApp app = new VaccineBSTApp();
         app.readFile("data/vaccinations.csv");
         app.userInterface();
-
-        System.out.println("Results:");
-        
-        for (String country : app.countries) {
-            if (country == null) break;
-            String result = app.getResult(country);
-            System.out.println(result);  
-        } 
     }
 }

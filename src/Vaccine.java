@@ -49,7 +49,7 @@ public class Vaccine implements Comparable<Vaccine> {
      * 
      * @return the key of the Vaccine object
      */
-    public String getKey() {
+    public String key() {
         return country + date; 
     }
 
@@ -63,7 +63,7 @@ public class Vaccine implements Comparable<Vaccine> {
      */
     @Override
     public int compareTo(Vaccine otherVaccine) {
-        return this.getKey().compareTo(otherVaccine.getKey());
+        return this.key().compareTo(otherVaccine.key());
     }
 
 }
