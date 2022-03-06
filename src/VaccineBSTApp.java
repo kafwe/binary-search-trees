@@ -15,7 +15,6 @@ public class VaccineBSTApp {
         tree = new BinarySearchTree<>();
     }
 
-    
     private void readFile(String path) {
         try {
             Scanner reader = new Scanner(new File(path));
@@ -63,7 +62,7 @@ public class VaccineBSTApp {
         }
 
         System.out.println("Results:");
-        System.out.println(results.strip());
+        System.out.println(results);
     }
 
 

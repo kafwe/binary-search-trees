@@ -62,7 +62,7 @@ public class VaccineArrayApp {
         }
 
         System.out.println("Results:");
-        System.out.println(results.strip());
+        System.out.println(results);
     }
 
 

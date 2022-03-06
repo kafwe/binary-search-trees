@@ -24,12 +24,14 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
             insert (d, node.left);
       }
       else
-      {
+      {   
          opCount++;
-         if (node.right == null)
-            node.right = new BinaryTreeNode<dataType> (d, null, null);
-         else
+         if (node.right == null) {
+            node.right = new BinaryTreeNode<dataType> (d, null, null); 
+         } else {
             insert (d, node.right);
+         }
+            
       }
    }
    
