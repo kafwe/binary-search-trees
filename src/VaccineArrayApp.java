@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Class to allow searching through the data using an array
@@ -65,11 +68,26 @@ public class VaccineArrayApp {
         System.out.println(results);
     }
 
+    private void writeOpCount(String filename) {
+        int opCount = data.getOpCount();
+        File file = new File("data/array/" + filename + ".txt");
+        
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(file, true));
+            writer.write(opCount + "\n");
+            writer.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         VaccineArrayApp app = new VaccineArrayApp();
         app.readFile("data/vaccinations.csv");
         app.userInterface();
+        String filename = args[0];
+        app.writeOpCount(filename);
     }
      
 }

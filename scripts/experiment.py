@@ -41,11 +41,12 @@ def main():
         empty_file('data/vaccinations.csv')
         subset_size = math.ceil(TOTAL_ENTRIES * ((x * 10)/100))
         create_subset(subset_size)
+        op_count_filename = f'{x}n{subset_size}'
          
         for n in range(0, subset_size):
             create_testinput()
-            os.system('java -cp bin VaccineArrayApp < testinput')
-            os.system('java -cp bin VaccineBSTApp < testinput')
+            os.system(f'java -cp bin VaccineArrayApp {op_count_filename} < testinput')
+            #os.system(f'java -cp bin VaccineBSTApp {op_count_filename} < testinput')
 
 
 if __name__ == '__main__':

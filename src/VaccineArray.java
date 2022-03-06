@@ -27,6 +27,10 @@ public class VaccineArray {
         records++;
     }
 
+    public int getOpCount() {
+        return opCount;
+    }
+    
     /**
      * Searches the data (Vaccine array) for the given vaccine
      * 
@@ -43,8 +47,6 @@ public class VaccineArray {
             }   
         }
         return null;
-    }
-
-    
+    }    
 
 }
