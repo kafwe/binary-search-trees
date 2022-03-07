@@ -26,20 +26,42 @@ public class Vaccine implements Comparable<Vaccine> {
         vaccinations = data.length == 3 ? Integer.parseInt(data[2]) : 0;
     }
 
+    /**
+     * Constructs a Vaccine object with the given country and date. 
+     * The vaccinations are set to 0.
+     * 
+     * @param country the country which the vaccinations are from 
+     * @param date the date these vaccinations took place
+     */
     public Vaccine(String country, String date) {
         this.country = country;
         this.date = date;
         vaccinations = 0;
     }
 
+    /**
+     * Returns the country
+     * 
+     * @return the String representing the country where the vaccinations are from
+     */
     public String getCountry() {
         return country;
     }
 
+    /**
+     * Returns the date
+     * 
+     * @return the String representing the date the vaccinations took place
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Returns the number of vaccinations
+     * 
+     * @return the integer representing the number of vaccinations for the country on a given date
+     */
     public int getVaccinations() {
         return vaccinations;
     }
@@ -65,6 +87,5 @@ public class Vaccine implements Comparable<Vaccine> {
     public int compareTo(Vaccine otherVaccine) {
         return this.key().compareTo(otherVaccine.key());
     }
-
 
 }

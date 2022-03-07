@@ -6,10 +6,21 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
 {
    private int opCount = 0; // opCount related code only addition by me 
 
+   /**
+    * Returns the number of key comparison operations performed by the
+    * binary search tree
+    * 
+    *  @return the integer representing the number of key comparisons 
+    */
    public int getOpCount() {
        return opCount;
    }
 
+   /**
+    * Sets the number of key comparison operations to the given integer.
+    * 
+    * @param opCount the integer representing the number of key comparisons
+    */
    public void setOpCount(int opCount) {
        this.opCount = opCount;
    }

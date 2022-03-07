@@ -7,6 +7,9 @@ import math
 
 TOTAL_ENTRIES = 9919
 
+"""Creates a subset of n entries from the sample data. 
+Writes all the entries in the subset to a CSV file.
+"""
 def create_subset(subset_size):
     with open('data/big_vaccinations.csv', 'r') as reader:
         with open('data/vaccinations.csv','w') as writer:
@@ -15,6 +18,10 @@ def create_subset(subset_size):
                 writer.write(line)
 
 
+""" Creates a a file of test input - 1 input per line.
+The test input is in the format: country, date. 
+The files ends with an empty line.
+ """
 def create_testinput():
     with open('data/vaccinations.csv', 'r') as vaccinations:
         with open('testinput','w') as writer:
@@ -24,7 +31,7 @@ def create_testinput():
             else:
                 writer.write('\n')
 
-            
+"""Driver function for the script."""
 def main():
     for x in range(1, 11):
         subset_size = math.ceil(TOTAL_ENTRIES * ((x * 10)/100))

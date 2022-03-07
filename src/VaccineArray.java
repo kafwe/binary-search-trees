@@ -11,6 +11,10 @@ public class VaccineArray {
     private int opCount;
 
 
+    /**
+     * Constructs a VaccineArray object capable of storing all the 
+     * entries in the CSV file.
+     */
     public VaccineArray() {
         data = new Vaccine[10000]; // 9919 entries in csv file
         records = 0;
@@ -27,17 +31,27 @@ public class VaccineArray {
         records++;
     }
 
-
+    /**
+    * Returns the number of key comparison operations performed by the
+    * VaccineArray.
+    * 
+    *  @return the integer representing the number of key comparisons 
+    */
     public int getOpCount() {
         return opCount;
     }
 
+    /**
+    * Sets the number of key comparison operations to the given integer.
+    * 
+    * @param opCount the integer representing the number of key comparisons
+    */
     public void setOpCount(int opCount) {
         this.opCount = opCount;
     }
 
     /**
-     * Searches the data (Vaccine array) for the given vaccine
+     * Searches the VaccineArray for the given vaccine
      * 
      * @param vaccine the vaccine to look for in the array
      * @return the vaccine object that has the vaccinations for the country 
