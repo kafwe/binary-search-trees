@@ -27,10 +27,15 @@ public class VaccineArray {
         records++;
     }
 
+
     public int getOpCount() {
         return opCount;
     }
-    
+
+    public void setOpCount(int opCount) {
+        this.opCount = opCount;
+    }
+
     /**
      * Searches the data (Vaccine array) for the given vaccine
      * 

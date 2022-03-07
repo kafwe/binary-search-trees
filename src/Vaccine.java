@@ -66,4 +66,5 @@ public class Vaccine implements Comparable<Vaccine> {
         return this.key().compareTo(otherVaccine.key());
     }
 
+
 }

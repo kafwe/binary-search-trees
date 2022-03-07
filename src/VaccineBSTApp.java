@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 /**
  * Class to allow searching through the data using a binary search tree
@@ -11,9 +13,11 @@ import java.io.File;
 public class VaccineBSTApp {
     private BinarySearchTree<Vaccine> tree;
 
+
     private VaccineBSTApp() {
         tree = new BinarySearchTree<>();
     }
+
 
     private void readFile(String path) {
         try {
@@ -22,8 +26,7 @@ public class VaccineBSTApp {
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 if (!line.isEmpty()) {
-                    Vaccine vaccine = new Vaccine(line);
-                    tree.insert(vaccine);
+                    tree.insert(new Vaccine(line));
                 }
             }
             
@@ -34,12 +37,11 @@ public class VaccineBSTApp {
     }
 
 
-    private String getResult(String country, String date) {
-        Vaccine vaccine = new Vaccine(country, date);
+    private String getResult(Vaccine vaccine) {
         BinaryTreeNode<Vaccine> found = this.tree.find(vaccine);
         String vaccinations = (found == null) ? "<Not Found>" : 
         Integer.toString(found.data.getVaccinations());
-        String result = country + " = " + vaccinations;
+        String result = vaccine.getCountry() + " = " + vaccinations;
         return result;
     }
 
@@ -56,19 +58,55 @@ public class VaccineBSTApp {
         String results = "";
 
         while (!country.isEmpty()) {
-            String result = getResult(country, date);
-            results += result + "\n"; 
+            String result = this.getResult(new Vaccine(country, date));
+            results += result + "\n";
             country = input.nextLine();
         }
 
         System.out.println("Results:");
-        System.out.println(results);
+        System.out.println(results.strip());
+
     }
 
+    public void writeOpCount(String filename, int opCount) {
+        File file = new File("data/bst/" + filename + ".txt");
+        
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(file, true));
+            writer.write(opCount + "\n");
+            writer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void experiment(String filename) {
+        Scanner input = new Scanner(System.in);
+        String line = input.nextLine(); 
+    
+        while (!line.isEmpty()) {
+            tree.setOpCount(0); 
+            getResult(new Vaccine(line));
+            int searchCount = tree.getOpCount();
+            writeOpCount(filename, searchCount);
+            line = input.nextLine();
+        }
+    }
 
     public static void main(String[] args) {
         VaccineBSTApp app = new VaccineBSTApp();
+        boolean isExperiment = args.length == 1;
         app.readFile("data/vaccinations.csv");
-        app.userInterface();
+
+        if (!isExperiment) {
+            app.userInterface();
+        } else {
+            String filename = args[0];
+            int insertCount = app.tree.getOpCount();
+            app.writeOpCount(filename, insertCount);
+            app.experiment(filename);
+        }
     }
 }

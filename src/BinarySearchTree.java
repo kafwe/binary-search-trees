@@ -6,6 +6,14 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
 {
    private int opCount = 0; // opCount related code only addition by me 
 
+   public int getOpCount() {
+       return opCount;
+   }
+
+   public void setOpCount(int opCount) {
+       this.opCount = opCount;
+   }
+
    public void insert ( dataType d )
    {
       if (root == null)

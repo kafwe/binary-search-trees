@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -37,13 +36,13 @@ public class VaccineArrayApp {
     }
 
 
-    private String getResult(String country, String date) {
+    private void getResult(String country, String date) {
         Vaccine vaccine = new Vaccine(country, date);
         Vaccine found = this.data.find(vaccine);
-        String vaccinations = (found == null) ? "<Not Found>" : 
-        Integer.toString(found.getVaccinations());
-        String result = country + " = " + vaccinations;
-        return result;
+        //String vaccinations = (found == null) ? "<Not Found>" : 
+        //Integer.toString(found.getVaccinations());
+       // String result = country + " = " + vaccinations;
+       // return result;
     }
 
 
@@ -59,13 +58,13 @@ public class VaccineArrayApp {
         String results = "";
 
         while (!country.isEmpty()) {
-            String result = getResult(country, date);
-            results += result + "\n"; 
+            getResult(country, date);
+           // results += result + "\n"; 
             country = input.nextLine();
         }
 
         System.out.println("Results:");
-        System.out.println(results);
+        //System.out.println(results);
     }
 
     private void writeOpCount(String filename) {

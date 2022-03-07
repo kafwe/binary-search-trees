@@ -4,50 +4,38 @@
 
 import os
 import math
-import itertools
 
 TOTAL_ENTRIES = 9919
-current_line = 0
 
 def create_subset(subset_size):
     with open('data/big_vaccinations.csv', 'r') as reader:
-        for x in range(0, subset_size):
-            with open('data/vaccinations.csv','a') as writer:
+        with open('data/vaccinations.csv','w') as writer:
+            for x in range(0, subset_size):
                 line = reader.readline()
                 writer.write(line)
 
 
 def create_testinput():
-    global current_line
-    with open('data/vaccinations.csv', 'r') as file:
+    with open('data/vaccinations.csv', 'r') as vaccinations:
         with open('testinput','w') as writer:
-            for line in itertools.islice(file, current_line, current_line + 1):
+            for line in vaccinations:
                 country, date, _ = line.split(',')
-                writer.write(date + '\n')
-                writer.write(country + '\n')
+                writer.write(f'{country},{date}\n')
+            else:
                 writer.write('\n')
-    current_line += 1
 
-
-def empty_file(file):
-    with open(file, 'w') as file:
-        pass
             
-
 def main():
-    global current_line
-    for x in range(1, 11): 
-        current_line = 0
-        empty_file('data/vaccinations.csv')
+    for x in range(1, 11):
         subset_size = math.ceil(TOTAL_ENTRIES * ((x * 10)/100))
         create_subset(subset_size)
-        op_count_filename = f'{x}n{subset_size}'
-         
-        for n in range(0, subset_size):
-            create_testinput()
-            os.system(f'java -cp bin VaccineArrayApp {op_count_filename} < testinput')
-            #os.system(f'java -cp bin VaccineBSTApp {op_count_filename} < testinput')
-
+        create_testinput()
+        
+        print(f'Running experiment on subset {x}')
+        op_count_filename = f'subset{x}'
+        os.system(f'java -cp bin VaccineArrayApp {op_count_filename} < testinput')
+        os.system(f'java -cp bin VaccineBSTApp {op_count_filename} < testinput')
+        
 
 if __name__ == '__main__':
     main()
