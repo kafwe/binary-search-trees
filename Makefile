@@ -28,3 +28,6 @@ runarray: $(CLASS_FILES)
 
 runbst: $(CLASS_FILES)
 	java -cp bin VaccineBSTApp
+
+experiment:
+	python3 scripts/experiment.py

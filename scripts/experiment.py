@@ -35,7 +35,7 @@ def main():
         op_count_filename = f'subset{x}'
         os.system(f'java -cp bin VaccineArrayApp {op_count_filename} < testinput')
         os.system(f'java -cp bin VaccineBSTApp {op_count_filename} < testinput')
-        
+    print('Experiment done!')
 
 if __name__ == '__main__':
     main()

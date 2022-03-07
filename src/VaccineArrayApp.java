@@ -11,12 +11,11 @@ import java.io.PrintWriter;
  */
 
 public class VaccineArrayApp {
-    private VaccineArray data;
+    private VaccineArray array;
     
     private VaccineArrayApp() {
-        data = new VaccineArray();
+        array = new VaccineArray();
     }
-
      
     private void readFile(String path) {
         try {
@@ -25,7 +24,7 @@ public class VaccineArrayApp {
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 if (!line.isEmpty()) {
-                    data.add(new Vaccine(line));
+                    array.add(new Vaccine(line));
                 }
             }
             
@@ -35,16 +34,13 @@ public class VaccineArrayApp {
         }
     }
 
-
-    private void getResult(String country, String date) {
-        Vaccine vaccine = new Vaccine(country, date);
-        Vaccine found = this.data.find(vaccine);
-        //String vaccinations = (found == null) ? "<Not Found>" : 
-        //Integer.toString(found.getVaccinations());
-       // String result = country + " = " + vaccinations;
-       // return result;
+    private String getResult(Vaccine vaccine) {
+        Vaccine found = this.array.find(vaccine);
+        String vaccinations = (found == null) ? "<Not Found>" : 
+        Integer.toString(found.getVaccinations());
+        String result = vaccine.getCountry() + " = " + vaccinations;
+        return result;
     }
-
 
     private void userInterface() {
         Scanner input = new Scanner(System.in);
@@ -58,17 +54,16 @@ public class VaccineArrayApp {
         String results = "";
 
         while (!country.isEmpty()) {
-            getResult(country, date);
-           // results += result + "\n"; 
+            String result = getResult(new Vaccine(country, date));
+            results += result + "\n"; 
             country = input.nextLine();
         }
 
         System.out.println("Results:");
-        //System.out.println(results);
+        System.out.println(results.strip());
     }
 
-    private void writeOpCount(String filename) {
-        int opCount = data.getOpCount();
+    private void writeOpCount(String filename, int opCount) {
         File file = new File("data/array/" + filename + ".txt");
         
         try {
@@ -81,12 +76,31 @@ public class VaccineArrayApp {
         }
     }
 
+    private void experiment(String filename) {
+        Scanner input = new Scanner(System.in);
+        String line = input.nextLine(); 
+    
+        while (!line.isEmpty()) {
+            array.setOpCount(0); 
+            getResult(new Vaccine(line));
+            int searchCount = array.getOpCount();
+            writeOpCount(filename, searchCount);
+            line = input.nextLine();
+        }
+    }
     public static void main(String[] args) {
         VaccineArrayApp app = new VaccineArrayApp();
         app.readFile("data/vaccinations.csv");
-        app.userInterface();
-        String filename = args[0];
-        app.writeOpCount(filename);
+        boolean isExperiment = args.length == 1; 
+
+        if (!isExperiment) {
+            app.userInterface(); 
+        } else {
+            String filename = args[0];
+            int insertCount = app.array.getOpCount();
+            app.writeOpCount(filename, insertCount);
+            app.experiment(filename);   
+        }
     }
      
 }

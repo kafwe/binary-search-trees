@@ -18,7 +18,6 @@ public class VaccineBSTApp {
         tree = new BinarySearchTree<>();
     }
 
-
     private void readFile(String path) {
         try {
             Scanner reader = new Scanner(new File(path));
@@ -36,7 +35,6 @@ public class VaccineBSTApp {
         }
     }
 
-
     private String getResult(Vaccine vaccine) {
         BinaryTreeNode<Vaccine> found = this.tree.find(vaccine);
         String vaccinations = (found == null) ? "<Not Found>" : 
@@ -44,7 +42,6 @@ public class VaccineBSTApp {
         String result = vaccine.getCountry() + " = " + vaccinations;
         return result;
     }
-
 
     private void userInterface() {
         Scanner input = new Scanner(System.in);
@@ -68,7 +65,7 @@ public class VaccineBSTApp {
 
     }
 
-    public void writeOpCount(String filename, int opCount) {
+    private void writeOpCount(String filename, int opCount) {
         File file = new File("data/bst/" + filename + ".txt");
         
         try {
@@ -82,7 +79,7 @@ public class VaccineBSTApp {
 
     }
 
-    public void experiment(String filename) {
+    private void experiment(String filename) {
         Scanner input = new Scanner(System.in);
         String line = input.nextLine(); 
     
@@ -94,7 +91,6 @@ public class VaccineBSTApp {
             line = input.nextLine();
         }
     }
-
     public static void main(String[] args) {
         VaccineBSTApp app = new VaccineBSTApp();
         boolean isExperiment = args.length == 1;
@@ -109,4 +105,4 @@ public class VaccineBSTApp {
             app.experiment(filename);
         }
     }
-}
+} 
