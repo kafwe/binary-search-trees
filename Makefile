@@ -31,3 +31,6 @@ runbst: $(CLASS_FILES)
 
 experiment:
 	python3 scripts/experiment.py
+
+summarise:
+	python3 scripts/analysis.py

@@ -3,3 +3,5 @@
 /.DS_Store
 /scripts/venv
 testinput
+/scripts/__pycache__
+data/.DS_Store
