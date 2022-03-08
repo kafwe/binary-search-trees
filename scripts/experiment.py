@@ -7,10 +7,11 @@ import math
 
 TOTAL_ENTRIES = 9919
 
-"""Creates a subset of n entries from the sample data. 
-Writes all the entries in the subset to a CSV file.
-"""
+
 def create_subset(subset_size):
+    """Creates a subset of n entries from the sample data.
+    Writes all the entries in the subset to a CSV file.
+    """
     with open('data/big_vaccinations.csv', 'r') as reader:
         with open('data/vaccinations.csv','w') as writer:
             for x in range(0, subset_size):
@@ -18,11 +19,11 @@ def create_subset(subset_size):
                 writer.write(line)
 
 
-""" Creates a a file of test input - 1 input per line.
-The test input is in the format: country, date. 
-The files ends with an empty line.
- """
 def create_testinput():
+    """ Creates a a file of test input - 1 input per line.
+    The test input is in the format: country, date. 
+    The files ends with an empty line.
+    """
     with open('data/vaccinations.csv', 'r') as vaccinations:
         with open('testinput','w') as writer:
             for line in vaccinations:
@@ -31,7 +32,23 @@ def create_testinput():
             else:
                 writer.write('\n')
 
-"""Driver function for the script."""
+def run_array(op_count_file):
+    """Runs the VaccineArrayApp and write the 
+    operation count values to a file 
+    (using Unix output redirection)
+    """
+    os.system(f'java -cp bin VaccineArrayApp {"experiment"} \
+        < testinput > data/array/{op_count_file}')
+
+def run_bst(op_count_file):
+    """Runs the VaccineBSTApp and writes the 
+    operation count values to a file 
+    (using Unix output redirection)
+    """
+    os.system(f'java -cp bin VaccineBSTApp  {"experiment"} \
+        < testinput > data/bst/{op_count_file}')
+
+
 def main():
     for x in range(1, 11):
         subset_size = math.ceil(TOTAL_ENTRIES * ((x * 10)/100))
@@ -39,9 +56,10 @@ def main():
         create_testinput()
         
         print(f'Running experiment on subset {x}')
-        op_count_filename = f'subset{x}'
-        os.system(f'java -cp bin VaccineArrayApp {op_count_filename} < testinput')
-        os.system(f'java -cp bin VaccineBSTApp {op_count_filename} < testinput')
+        op_count_file = f'subset{x}.txt'
+        run_array(op_count_file)
+        run_bst(op_count_file)
+
     print('Experiment done!')
 
 if __name__ == '__main__':

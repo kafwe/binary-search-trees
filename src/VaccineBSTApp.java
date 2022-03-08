@@ -1,7 +1,5 @@
 import java.util.Scanner;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 
 /**
  * Class to allow searching through the data using a binary search tree
@@ -12,6 +10,7 @@ import java.io.PrintWriter;
 
 public class VaccineBSTApp {
     private BinarySearchTree<Vaccine> tree;
+    private boolean isExperiment;
 
 
     /**
@@ -33,9 +32,15 @@ public class VaccineBSTApp {
             Scanner reader = new Scanner(new File(path));
 
             while (reader.hasNextLine()) {
+                tree.setOpCount(0);
                 String line = reader.nextLine();
                 if (!line.isEmpty()) {
                     tree.insert(new Vaccine(line));
+                }
+
+                if (isExperiment) {
+                    int insertCount = tree.getOpCount();
+                    System.out.println(insertCount);
                 }
             }
             
@@ -87,35 +92,12 @@ public class VaccineBSTApp {
     }
 
     /**
-     * Writes an operation count value to a file. 
-     * The method does not overwrite the file. It just appends to it. 
-     * 
-     * @param filename the text file to write the operation count to
-     * @param opCount the integer representing the number 
-     * of key comparisons performed by the array
-     */
-    private void writeOpCount(String filename, int opCount) {
-        File file = new File("data/bst/" + filename + ".txt");
-        
-        try {
-            PrintWriter writer = new PrintWriter(new FileWriter(file, true));
-            writer.write(opCount + "\n");
-            writer.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
      * Searches for each item in the given subset. 
-     * Writes all the operation count values for the operations 
-     * performed to find each item to a file 
-     * 
-     * @param filename the text file to write the operation count to 
+     * Writes all the operation count values 
+     * for the operations performed to 
+     * find each item to a file (using unix output redirection)
      */
-    private void experiment(String filename) {
+    private void experiment() {
         Scanner input = new Scanner(System.in);
         String line = input.nextLine(); 
     
@@ -123,32 +105,26 @@ public class VaccineBSTApp {
             tree.setOpCount(0); 
             getResult(new Vaccine(line));
             int searchCount = tree.getOpCount();
-            writeOpCount(filename, searchCount);
+            System.out.println(searchCount);
             line = input.nextLine();
         }
     }
 
-
     /**
      * Driver method for the class
      * 
-     * @param args the first command line argument is the filename of the file 
-     * where the operation counts are written. 
-     * The presence of this argument also determines whether an experiment 
-     * or normal user interface is executed.
+     * @param args the first command line argument determines whether 
+     * an experiment or normal user interface is executed.
      */
     public static void main(String[] args) {
         VaccineBSTApp app = new VaccineBSTApp();
-        boolean isExperiment = args.length == 1;
+        app.isExperiment = args.length == 1;
         app.readFile("data/vaccinations.csv");
 
-        if (!isExperiment) {
-            app.userInterface();
+        if (app.isExperiment) {
+            app.experiment();
         } else {
-            String filename = args[0];
-            int insertCount = app.tree.getOpCount();
-            app.writeOpCount(filename, insertCount);
-            app.experiment(filename);
+            app.userInterface();
         }
     }
 } 

@@ -24,7 +24,7 @@ clean:
 	rm $(BINDIR)/*.class
 	
 runarray: $(CLASS_FILES)
-	java -cp bin VaccineArrayApp
+	 
 
 runbst: $(CLASS_FILES)
 	java -cp bin VaccineBSTApp

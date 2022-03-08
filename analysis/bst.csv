@@ -1,0 +1,11 @@
+Data Structure,n,Insert Best,Insert Average,Insert Worst,Search Best,Search Average,Search Worst
+bst,992,0,12,23,1,13,24
+bst,1984,0,14,26,1,15,27
+bst,2976,0,14,26,1,15,27
+bst,3968,0,15,28,1,16,29
+bst,4960,0,15,28,1,16,29
+bst,5952,0,16,29,1,17,30
+bst,6944,0,16,29,1,17,30
+bst,7936,0,16,30,1,17,31
+bst,8928,0,17,30,1,18,31
+bst,9919,0,17,30,1,18,31

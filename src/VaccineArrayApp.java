@@ -1,7 +1,5 @@
 import java.util.Scanner;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 
 /**
  * Class to allow searching through the data using an array
@@ -12,6 +10,7 @@ import java.io.PrintWriter;
 
 public class VaccineArrayApp {
     private VaccineArray array;
+    private boolean isExperiment;
     
     /**
      * Constructs a VaccineArrayApp object and initialise a VaccineArray object 
@@ -35,6 +34,10 @@ public class VaccineArrayApp {
                 String line = reader.nextLine();
                 if (!line.isEmpty()) {
                     array.add(new Vaccine(line));
+                }
+                if (isExperiment) {
+                    int insertCount = array.getOpCount();
+                    System.out.println(insertCount);
                 }
             }
             
@@ -85,42 +88,18 @@ public class VaccineArrayApp {
     }
 
     /**
-     * Writes an operation count value to a file.
-     * The method does not overwrite the file. It just appends to it.
-     * 
-     * @param filename the text file to write the operation count to
-     * @param opCount the integer representing the number 
-     * of key comparisons performed by the array
-     */
-    private void writeOpCount(String filename, int opCount) {
-        File file = new File("data/array/" + filename + ".txt");
-        
-        try {
-            PrintWriter writer = new PrintWriter(new FileWriter(file, true));
-            writer.write(opCount + "\n");
-            writer.close();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Searches for each item in the given subset. 
      * Writes all the operation count values for the operations 
-     * performed to find each item to a file 
-     * 
-     * @param filename the text file to write the operation count to 
+     * performed to find each item to a file (using unix output redirection)
      */
-    private void experiment(String filename) {
+    private void experiment() {
         Scanner input = new Scanner(System.in);
         String line = input.nextLine(); 
     
         while (!line.isEmpty()) {
-            array.setOpCount(0); 
             getResult(new Vaccine(line));
             int searchCount = array.getOpCount();
-            writeOpCount(filename, searchCount);
+            System.out.println(searchCount);
             line = input.nextLine();
         }
     }
@@ -128,23 +107,18 @@ public class VaccineArrayApp {
     /**
      * Driver method for the class
      * 
-     * @param args the first command line argument is the filename of the file 
-     * where the operation counts are written. 
-     * The presence of this argument also determines whether an experiment 
+     * @param args the first command line argument determines whether an experiment 
      * or normal user interface is executed.
      */
     public static void main(String[] args) {
         VaccineArrayApp app = new VaccineArrayApp();
+        app.isExperiment = args.length == 1;
         app.readFile("data/vaccinations.csv");
-        boolean isExperiment = args.length == 1; 
 
-        if (!isExperiment) {
-            app.userInterface(); 
+        if (app.isExperiment) {
+            app.experiment();
         } else {
-            String filename = args[0];
-            int insertCount = app.array.getOpCount();
-            app.writeOpCount(filename, insertCount);
-            app.experiment(filename);   
+            app.userInterface();
         }
     }
      

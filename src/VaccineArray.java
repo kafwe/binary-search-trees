@@ -42,15 +42,6 @@ public class VaccineArray {
     }
 
     /**
-    * Sets the number of key comparison operations to the given integer.
-    * 
-    * @param opCount the integer representing the number of key comparisons
-    */
-    public void setOpCount(int opCount) {
-        this.opCount = opCount;
-    }
-
-    /**
      * Searches the VaccineArray for the given vaccine
      * 
      * @param vaccine the vaccine to look for in the array
@@ -58,6 +49,7 @@ public class VaccineArray {
      * or null if it is not found
      */
     public Vaccine find(Vaccine vaccine) {
+        opCount = 0;
         for (int i = 0; i < records; i++) {
             boolean isEqual = vaccine.compareTo(data[i]) == 0;
             opCount++;
