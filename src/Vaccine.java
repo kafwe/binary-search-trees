@@ -88,4 +88,12 @@ public class Vaccine implements Comparable<Vaccine> {
         return this.key().compareTo(otherVaccine.key());
     }
 
+    /**
+     * Returns a string representation of a Vaccine object
+     */
+    @Override
+    public String toString() {
+        return country + " = " + vaccinations;
+    }
+
 }

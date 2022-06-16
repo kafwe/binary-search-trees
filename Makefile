@@ -25,9 +25,11 @@ clean:
 	
 runarray: $(CLASS_FILES)
 	 
-
 runbst: $(CLASS_FILES)
 	java -cp bin VaccineBSTApp
+
+docs:
+	javadoc -d doc/ src/*.java
 
 experiment:
 	python3 scripts/experiment.py

@@ -16,7 +16,7 @@ public class VaccineArrayApp {
      * Constructs a VaccineArrayApp object and initialise a VaccineArray object 
      * that stores the data
      */
-    private VaccineArrayApp() {
+    public VaccineArrayApp() {
         array = new VaccineArray();
     }
      
@@ -26,7 +26,7 @@ public class VaccineArrayApp {
      * 
      * @param path the path of the CSV file to read
      */
-    private void readFile(String path) {
+    public void readInFile(String path) {
         try {
             Scanner reader = new Scanner(new File(path));
 
@@ -55,18 +55,17 @@ public class VaccineArrayApp {
      * @return the String containing the country and the daily vaccination number 
      * or <strong><Not Found></strong> where the Vaccine object could not be found
      */
-    private String getResult(Vaccine vaccine) {
-        Vaccine found = this.array.find(vaccine);
-        String vaccinations = (found == null) ? "<Not Found>" : 
-        Integer.toString(found.getVaccinations());
-        String result = vaccine.getCountry() + " = " + vaccinations;
+    public String getResult(Vaccine vaccine) {
+        Vaccine found = array.find(vaccine);
+        String result = (found == null) ? vaccine.getCountry() + " = <Not Found>" 
+        : found.toString();
         return result;
     }
 
     /**
      * Provides a user interface for the user to interact with the program. 
      */
-    private void userInterface() {
+    public void userInterface() {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter the date:");
@@ -92,7 +91,7 @@ public class VaccineArrayApp {
      * Writes all the operation count values for the operations 
      * performed to find each item to a file (using unix output redirection)
      */
-    private void experiment() {
+    public void experiment() {
         Scanner input = new Scanner(System.in);
         String line = input.nextLine(); 
     
@@ -113,7 +112,7 @@ public class VaccineArrayApp {
     public static void main(String[] args) {
         VaccineArrayApp app = new VaccineArrayApp();
         app.isExperiment = args.length == 1;
-        app.readFile("data/vaccinations.csv");
+        app.readInFile("data/vaccinations.csv");
 
         if (app.isExperiment) {
             app.experiment();

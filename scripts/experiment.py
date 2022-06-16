@@ -12,7 +12,7 @@ def create_subset(subset_size):
     """Creates a subset of n entries from the sample data.
     Writes all the entries in the subset to a CSV file.
     """
-    with open('data/big_vaccinations.csv', 'r') as reader:
+    with open('data/big_vaccinations.csv','r') as reader:
         with open('data/vaccinations.csv','w') as writer:
             for x in range(0, subset_size):
                 line = reader.readline()
@@ -21,7 +21,7 @@ def create_subset(subset_size):
 
 def create_testinput():
     """ Creates a a file of test input - 1 input per line.
-    The test input is in the format: country, date. 
+    The test input is in the format: country, date.
     The files ends with an empty line.
     """
     with open('data/vaccinations.csv', 'r') as vaccinations:

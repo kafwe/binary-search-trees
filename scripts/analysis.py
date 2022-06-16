@@ -9,10 +9,9 @@ from experiment import TOTAL_ENTRIES
 FIELDS = ['Data Structure', 'n', 'Insert Best', 'Insert Average', 'Insert Worst', 
 'Search Best', 'Search Average', 'Search Worst']
 
-
-"""Returns the best, average, and worst cases."""
 def summarise_values(op_counts):
-    op_counts = list(map(int,op_counts))
+    """Returns the best, average, and worst cases."""
+    op_counts = list(map(int, op_counts))
     best = min(op_counts)
     average = math.ceil(sum(op_counts)/len(op_counts))
     worst = max(op_counts)
@@ -21,14 +20,16 @@ def summarise_values(op_counts):
 def get_row(data_structure, subset_size, num):
     """Returns a row of the CSV file."""
     with open(f'data/{data_structure}/subset{num}.txt', 'r') as file:
-            op_counts = file.readlines()
-            insert_counts = op_counts[:subset_size]
-            search_counts = op_counts[subset_size:]
-            insert_best, insert_average, insert_worst = summarise_values(insert_counts)
-            search_best, search_average, search_worst = summarise_values(search_counts)
+        op_counts = file.readlines()
+        insert_counts = op_counts[:subset_size]
+        search_counts = op_counts[subset_size:]
+        insert_best, insert_average, insert_worst = summarise_values(insert_counts)
+        search_best, search_average, search_worst = summarise_values(search_counts)
 
-            row = [data_structure, subset_size, insert_best, insert_average, 
-            insert_worst, search_best, search_average, search_worst]
+    row = [data_structure, subset_size, insert_best, insert_average,
+        insert_worst, search_best, search_average, search_worst]
+
+    return row
 
 
 def write_csv(data_structure):
